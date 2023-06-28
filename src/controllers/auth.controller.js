@@ -1,6 +1,6 @@
 import Usuario from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
-import { creatAccesoToken } from "../libs/jwt.js";
+import { crearAccesoToken } from "../libs/jwt.js";
 
 export const registro = async (req, res) => {
   const { username, email, password } = req.body;
@@ -16,7 +16,7 @@ export const registro = async (req, res) => {
 
     const usuarioGuardado = await nuevoUsuario.save();
     /* llamamos a la función creatAccesoToken definida en el directorio libs */
-    const token = await creatAccesoToken({ id: usuarioGuardado._id });
+    const token = await crearAccesoToken({ id: usuarioGuardado._id });
     res.cookie("token", token);
 
     /* aquí se definen solo los atributos que se van a utilizar en el frontend */
