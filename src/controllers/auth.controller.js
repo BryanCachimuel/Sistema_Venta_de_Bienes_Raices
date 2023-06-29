@@ -32,30 +32,54 @@ export const registro = async (req, res) => {
   }
 };
 
-export const inicio_sesion = async (req, res) => {
-    const { email, password } = req.body;
-  
-    try {
+export const iniciar_sesion = async (req, res) => {
+  const { email, password } = req.body;
 
-      const usuarioEncontrado = await Usuario.findOne({email});
-      if(!usuarioEncontrado) return res.status(400).json({message:"Usuario no Encontrado"});
-      
-      const contraseniasCoinciden = await bcryptjs.compare(password, usuarioEncontrado.password)
-      if(!contraseniasCoinciden) return res.status(400).json({message:"Las contraseñas no Coinciden"});
-  
-      /* llamamos a la función creatAccesoToken definida en el directorio libs */
-      const token = await crearAccesoToken({ id: usuarioEncontrado._id });
-      res.cookie("token", token);
-  
-      /* aquí se definen solo los atributos que se van a utilizar en el frontend */
-      res.json({
-        id: usuarioEncontrado._id,
-        username: usuarioEncontrado.username,
-        email: usuarioEncontrado.email,
-        createdAt: usuarioEncontrado.createdAt,
-        updatedAt: usuarioEncontrado.updatedAt,
-      });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  };
+  try {
+    const usuarioEncontrado = await Usuario.findOne({ email });
+    if (!usuarioEncontrado)
+      return res.status(400).json({ message: "Usuario no Encontrado" });
+
+    const contraseniasCoinciden = await bcryptjs.compare(
+      password,
+      usuarioEncontrado.password
+    );
+    if (!contraseniasCoinciden)
+      return res.status(400).json({ message: "Las contraseñas no Coinciden" });
+
+    /* llamamos a la función creatAccesoToken definida en el directorio libs */
+    const token = await crearAccesoToken({ id: usuarioEncontrado._id });
+    res.cookie("token", token);
+
+    /* aquí se definen solo los atributos que se van a utilizar en el frontend */
+    res.json({
+      id: usuarioEncontrado._id,
+      username: usuarioEncontrado.username,
+      email: usuarioEncontrado.email,
+      createdAt: usuarioEncontrado.createdAt,
+      updatedAt: usuarioEncontrado.updatedAt,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const cerrar_sesion = (req, res) => {
+  res.cookie('token',"",{
+    expires: new Date(0)
+  });
+  return res.status(200).json({message:"Se cerro la sesión"});
+};
+
+export const inicio = async (req, res) =>  {
+  const usuarioEncontrado = await Usuario.findById(req.user.id);
+  if(!usuarioEncontrado) return res.status(400).json({message: "Usuario no Encontrado"});
+  return res.json({
+    id: usuarioEncontrado._id,
+    username: usuarioEncontrado.username,
+    email: usuarioEncontrado.email,
+    createdAt: usuarioEncontrado.createdAt,
+    updatedAt: usuarioEncontrado.updatedAt,
+  });
+  res.send("Inicio en el perfil");
+}
