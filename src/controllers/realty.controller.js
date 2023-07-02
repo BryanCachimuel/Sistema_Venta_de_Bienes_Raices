@@ -2,7 +2,9 @@ import BienesRaices from '../models/realty.model.js';
 
 export const listaBienesRaices = async (req, res) =>{
     try {
-        const bienesRaices = await BienesRaices.find();
+        const bienesRaices = await BienesRaices.find({
+            user: req.user.id
+        }).populate('user');
         res.json(bienesRaices); 
     } catch (error) {
         res.status(500).json({message: error.message});
@@ -18,7 +20,8 @@ export const crearBienRaiz = async (req, res) =>{
             propietario,
             costo,
             antiguedad,
-            fecha
+            fecha,
+            user: req.user.id
         });
         const bienraizGuardado = await bienraiz.save();
         res.json(bienraizGuardado);
@@ -29,7 +32,7 @@ export const crearBienRaiz = async (req, res) =>{
 
 export const obtenerBieneRaiz = async (req, res) =>{
     try {
-       const bienraiz = await BienesRaices.findById(req.params.id);
+       const bienraiz = await BienesRaices.findById(req.params.id).populate('user');
        if(!bienraiz) return res.status(404).json({ message: "Bien Raíz no Encontrado" }); 
        res.json(bienraiz);
     } catch (error) {
@@ -52,7 +55,7 @@ export const eliminarBienRaiz = async (req, res) =>{
     try {
         const borrarBienRaiz = await BienesRaices.findByIdAndDelete(req.params.id);
         if(!borrarBienRaiz) return res.status(404).json({ message: "Bien Raíz no Encontrado" });
-        res.json(borrarBienRaiz);   
+        return res.status(200).json({message: "Bien Raíz Eliminado Satisfactoriamente"});
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
