@@ -1,9 +1,24 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import Registro from "./pages/RegisterPage";
+import Inicio_Sesion from "./pages/LoginPage";
+
 function App() {
   return (
-    <div>
-      <h1 className="text-4xl font-bold">Hola Bienvenido a React con Vite</h1>
-    </div>
-  )
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<h1>Pagina Inicio</h1>} />
+          <Route path="/inicio_sesion" element={<Inicio_Sesion />} />
+          <Route path="/registro" element={<Registro />} />
+          <Route path="/bienes_raices" element={<h1>Bienes Raices</h1>} />
+          <Route path="/crear_bienes_raices" element={<h1>Crear Bienes Raices</h1>}/>
+          <Route path="/bienes_raices/:id" element={<h1>Actualizar Bienes Raices</h1>}/>
+          <Route path="/perfil_usuario" element={<h1>Perfil de Usuarios</h1>} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
