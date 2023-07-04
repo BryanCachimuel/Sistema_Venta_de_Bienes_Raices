@@ -1,13 +1,20 @@
 /* se usa el hook useForm para hacer un proceso más consiso para los formularios */
 import { useForm } from "react-hook-form";
-import { registroRequest } from "../api/auth.js";
+import {useAuth} from '../context/AuthContext';
+import { useEffect } from "react";
+import {useNavigate} from 'react-router-dom'
 
 function RegisterPage() {
   const { register, handleSubmit } = useForm();
+  const {registroUsuarios, isAuthenticated} = useAuth();
+  const navegacion = useNavigate();
+  
+  useEffect(() => {
+    if(isAuthenticated) navegacion("/bienes_raices");
+  }, [isAuthenticated])
 
   const registroOnSubmit = handleSubmit(async (values) => {
-    const respuesta = registroRequest(values);
-    console.log(respuesta);
+     registroUsuarios(values);
   });
 
   return (
