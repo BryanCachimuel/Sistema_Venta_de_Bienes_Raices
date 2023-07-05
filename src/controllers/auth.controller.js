@@ -6,6 +6,10 @@ export const registro = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
+    const usuarioEncontrado = await Usuario.findOne({email});
+    /* validando que los usuarios nuevos no ingresen el mismo correo que se encuentre registrado */
+    if(usuarioEncontrado) return res.status(400).json(["El correo ya está en uso"]);
+
     const passwordHash = await bcryptjs.hash(password, 10);
 
     const nuevoUsuario = new Usuario({
