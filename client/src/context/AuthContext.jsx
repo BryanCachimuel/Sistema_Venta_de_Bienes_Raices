@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
 
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   const registroUsuarios = async (user) => {
     try {
@@ -24,7 +25,8 @@ export const AuthProvider = ({ children }) => {
         setUser(respuesta.data);
         setIsAuthenticated(true);
     } catch (error) {
-        console.log(error);
+      //console.log(error.response);
+        setErrors(error.response.data);
     }
   };
 
@@ -34,6 +36,7 @@ export const AuthProvider = ({ children }) => {
             registroUsuarios, 
             user, 
             isAuthenticated,
+            errors,
         }}
     >
       {children}
