@@ -42,14 +42,14 @@ export const iniciar_sesion = async (req, res) => {
   try {
     const usuarioEncontrado = await Usuario.findOne({ email });
     if (!usuarioEncontrado)
-      return res.status(400).json({ message: "Usuario no Encontrado" });
+      return res.status(400).json(["Usuario no Encontrado"]);
 
     const contraseniasCoinciden = await bcryptjs.compare(
       password,
       usuarioEncontrado.password
     );
     if (!contraseniasCoinciden)
-      return res.status(400).json({ message: "Las contraseñas no Coinciden" });
+      return res.status(400).json(["Las contraseñas no Coinciden"]);
 
     /* llamamos a la función creatAccesoToken definida en el directorio libs */
     const token = await crearAccesoToken({ id: usuarioEncontrado._id });
