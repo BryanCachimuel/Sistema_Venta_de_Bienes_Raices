@@ -26,7 +26,7 @@ function RegisterPage() {
           </div>
         ))
       }
-      <form onSubmit={registroOnSubmit}>
+      <form onSubmit={registroOnSubmit} autoComplete="off">
         <input
           type="text"
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
