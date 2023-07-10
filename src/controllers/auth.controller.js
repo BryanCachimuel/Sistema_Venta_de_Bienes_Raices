@@ -49,7 +49,7 @@ export const iniciar_sesion = async (req, res) => {
       usuarioEncontrado.password
     );
     if (!contraseniasCoinciden)
-      return res.status(400).json(["Las contraseñas no Coinciden"]);
+      return res.status(400).json(["La contraseña ingresada es Incorrecta"]);
 
     /* llamamos a la función creatAccesoToken definida en el directorio libs */
     const token = await crearAccesoToken({ id: usuarioEncontrado._id });
