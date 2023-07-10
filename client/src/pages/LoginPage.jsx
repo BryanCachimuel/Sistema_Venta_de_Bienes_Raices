@@ -1,5 +1,6 @@
 import {useForm} from 'react-hook-form';
 import {useAuth} from '../context/AuthContext';
+import {Link} from 'react-router-dom'
 
 function LoginPage() {
 
@@ -16,7 +17,7 @@ function LoginPage() {
       <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
         {
           inicioSesionErrors.map((error, i) => (
-            <div className="bg-red-500 p-2 text-white" key={i}>
+            <div className="bg-red-500 p-2 text-white text-center my-2" key={i}>
               {error}
             </div>
           ))
@@ -37,8 +38,12 @@ function LoginPage() {
             placeholder="Contraseña"
           />
           {errors.password && (<p className="text-red-500">Contraseña de Usuario Requerido</p>)}
-          <button type="submit">Ingresar</button>
+          <button className="bg-transparent hover:bg-blue-500 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded mb-6 mt-3" type="submit">Ingresar</button>
         </form>
+        <hr />
+        <p className="flex gap-x-2 justify-between mt-3">
+          Si no se a registrado por favor, <Link to="/registro" className="text-sky-500">Registrarse</Link>
+        </p>
       </div>
     </div>
   )
