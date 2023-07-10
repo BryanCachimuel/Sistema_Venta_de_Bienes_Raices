@@ -1,7 +1,5 @@
-import axios from 'axios';
+import axios from './axios';
 
-const API = 'http://localhost:3005/api';
+export const registroRequest = user => axios.post(`/registro`, user);
 
-export const registroRequest = user => axios.post(`${API}/registro`, user);
-
-export const inicioSesionRequest = user => axios.post(`${API}/iniciar_sesion`, user);
+export const inicioSesionRequest = user => axios.post(`/iniciar_sesion`, user);
