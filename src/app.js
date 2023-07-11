@@ -10,7 +10,8 @@ const app = express();
 
 /* le decimos mediante este cors que el backend funcione solo con el frontend a traves del puerto 5173 */
 app.use(cors({
-    origin: 'http://localhost:5173'
+    origin: 'http://localhost:5173',
+    credentials: true
 }));
 app.use(morgan('dev'));
 app.use(express.json());
