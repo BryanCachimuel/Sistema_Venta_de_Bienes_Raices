@@ -8,25 +8,28 @@ import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
 
 import ProtectedRoute from './ProtectedRoute'
+import { RealtyProvider } from "./context/RealtyContext";
 
 function App() {
   return (
     <AuthProvider>
+     <RealtyProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/iniciar_sesion" element={<Inicio_Sesion />} />
-          <Route path="/registro" element={<Registro />} />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/iniciar_sesion" element={<Inicio_Sesion />} />
+            <Route path="/registro" element={<Registro />} />
 
-          {/* Rutas protegidas */}
-          <Route element={<ProtectedRoute/>}>
-            <Route path="/bienes_raices" element={<RealtyPage />} />
-            <Route path="/crear_bienes_raices" element={<RealtyFormPage />} />
-            <Route path="/bienes_raices/:id" element={<RealtyFormPage />} />
-            <Route path="/perfil_usuario" element={<ProfilePage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            {/* Rutas protegidas */}
+            <Route element={<ProtectedRoute/>}>
+              <Route path="/bienes_raices" element={<RealtyPage />} />
+              <Route path="/crear_bienes_raices" element={<RealtyFormPage />} />
+              <Route path="/bienes_raices/:id" element={<RealtyFormPage />} />
+              <Route path="/perfil_usuario" element={<ProfilePage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+     </RealtyProvider>
     </AuthProvider>
   );
 }
