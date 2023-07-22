@@ -1,4 +1,5 @@
-import {createContext, useContext} from 'react';
+import {createContext, useContext, useState} from 'react';
+import {crearBienRaizRequest} from '../api/realty';
 
 const RealtyContext = createContext();
 
@@ -11,8 +12,20 @@ export const useRealty = () => {
 }
 
 export function RealtyProvider({children}) {
+
+    const [realtys, setRealtys] = useState([]); 
+
+    const crearBienesRaices = async (bienRaiz) => {
+        try {
+            const respuesta = await crearBienRaizRequest(bienRaiz);
+            console.log(respuesta);
+        } catch (error) {
+            console.log(error.response);
+        }
+    }
+
     return(
-        <RealtyContext.Provider value={{}}>
+        <RealtyContext.Provider value={{realtys, crearBienesRaices}}>
             {children}
         </RealtyContext.Provider>
     );
