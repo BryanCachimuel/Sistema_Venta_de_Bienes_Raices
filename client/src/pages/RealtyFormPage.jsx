@@ -1,11 +1,14 @@
 import {useForm} from 'react-hook-form'
+import {useRealty} from '../context/RealtyContext';
 
 function RealtyFormPage() {
 
   const {register, handleSubmit} = useForm();
 
+  const {crearBienesRaices} = useRealty();
+
   const registraronSubmit = handleSubmit((data) => {
-    console.log(data)
+    crearBienesRaices(data)
   })
 
   return (
@@ -36,14 +39,14 @@ function RealtyFormPage() {
         <input 
           type="number" 
           placeholder="Costo del Inmueble"
-          {...register("costo")}
+          {...register("costo", { valueAsNumber: true })}
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
         />
 
         <input 
           type="number" 
           placeholder="Antiguedas del Inmueble"
-          {...register("antiguedad")}
+          {...register("antiguedad", { valueAsNumber: true })}
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
         />
 
