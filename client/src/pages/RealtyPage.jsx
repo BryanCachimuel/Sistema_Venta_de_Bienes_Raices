@@ -7,7 +7,9 @@ function RealtyPage() {
   
   useEffect(() => {
     obtenerTodosBienesRaices();
-  },[])
+  },[]);
+
+  if(realtys.length === 0) return (<h1>No Existe Bienes Raices</h1>);
 
   return (
     <div>
