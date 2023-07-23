@@ -13,7 +13,7 @@ function RealtyFormPage() {
 
   return (
     <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
-      <form onSubmit={registraronSubmit}>
+      <form onSubmit={registraronSubmit} autoComplete='off'>
         <input 
           type="text" 
           placeholder="Tipo de Inmueble" 
