@@ -9,12 +9,14 @@ import HomePage from "./pages/HomePage";
 
 import ProtectedRoute from './ProtectedRoute'
 import { RealtyProvider } from "./context/RealtyContext";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <AuthProvider>
      <RealtyProvider>
       <BrowserRouter>
+      <Navbar/>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/iniciar_sesion" element={<Inicio_Sesion />} />
