@@ -49,6 +49,12 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
+  const cerrar_sesion = () => {
+    Cookies.remove("token");
+    setIsAuthenticated(false);
+    setUser(null);
+  }
+
   /* para eliminar los mensajes de error una vez sean vistos por el usuario */
   useEffect(() => {
     if(errors.length > 0){
@@ -94,6 +100,7 @@ export const AuthProvider = ({ children }) => {
         value={{ 
             registroUsuarios, 
             inicioSesionUsuario,
+            cerrar_sesion,
             loading,
             user, 
             isAuthenticated,
