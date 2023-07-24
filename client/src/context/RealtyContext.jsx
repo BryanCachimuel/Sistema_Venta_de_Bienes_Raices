@@ -18,7 +18,7 @@ export function RealtyProvider({children}) {
     const obtenerTodosBienesRaices = async () => {
         try {
             const respuesta = await obtenerBienesRaicesRequest();
-            setRealtys(res.data);
+            setRealtys(respuesta.data);
             console.log(respuesta);
         } catch (error) {
             console.log(error.response);
