@@ -1,5 +1,6 @@
 import {useForm} from 'react-hook-form'
 import {useRealty} from '../context/RealtyContext';
+import {useNavigate} from 'react-router-dom';
 
 function RealtyFormPage() {
 
@@ -7,13 +8,18 @@ function RealtyFormPage() {
 
   const {crearBienesRaices} = useRealty();
 
+  const navegar = useNavigate();
+
   const registraronSubmit = handleSubmit((data) => {
-    crearBienesRaices(data)
+    crearBienesRaices(data);
+    navegar('/bienes_raices');
   })
 
   return (
-    <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
+   <div className="flex h-[calc(100vh-100px)] items-center justify-center">
+     <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
       <form onSubmit={registraronSubmit} autoComplete='off'>
+        <h1 className="text-2xl font-bold">Crear Bien Raíz</h1>
         <input 
           type="text" 
           placeholder="Tipo de Inmueble" 
@@ -55,6 +61,7 @@ function RealtyFormPage() {
         </button>
       </form>
     </div>
+   </div>
   )
 }
 
