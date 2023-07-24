@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import {useRealty} from '../context/RealtyContext'
+import {useRealty} from '../context/RealtyContext';
+import RealtyCard from '../components/RealtyCard';
 
 function RealtyPage() {
 
@@ -12,15 +13,9 @@ function RealtyPage() {
   if(realtys.length === 0) return (<h1>No Existe Bienes Raices</h1>);
 
   return (
-    <div>
+    <div className='grid grid-cols-3 gap-2'>
       {realtys.map((realty) =>(
-        <div key={realty._id}>
-          <h1>{realty.inmueble}</h1>
-          <p>{realty.descripcion}</p>
-          <p>{realty.propietario}</p>
-          <p>{realty.costo}</p>
-          <p>{realty.antiguedad}</p>
-        </div>
+       <RealtyCard realty={realty} key={realty._id}/>
       ))}
     </div>
   )
