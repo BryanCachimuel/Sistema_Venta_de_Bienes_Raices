@@ -1,5 +1,5 @@
 import {createContext, useContext, useState} from 'react';
-import {crearBienRaizRequest, obtenerBienesRaicesRequest, eliminarBienRaizRequest} from '../api/realty';
+import {crearBienRaizRequest, obtenerBienesRaicesRequest, eliminarBienRaizRequest, obtenerBienRaizRequest} from '../api/realty';
 
 const RealtyContext = createContext();
 
@@ -43,6 +43,15 @@ export function RealtyProvider({children}) {
         }
     }
 
+    const obtenerBienRaiz = async (id) => {
+        try {
+            const respuesta = await obtenerBienRaizRequest(id);
+            console.log(respuesta)
+        } catch (error) {
+            console.log(error.response);
+        }
+    }
+
     return(
         <RealtyContext.Provider 
             value={{
@@ -50,6 +59,7 @@ export function RealtyProvider({children}) {
                 crearBienesRaices,
                 obtenerTodosBienesRaices,
                 eliminarBienRaiz,
+                obtenerBienRaiz,
             }}
         >
             {children}
