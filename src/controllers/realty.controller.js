@@ -7,7 +7,7 @@ export const listaBienesRaices = async (req, res) =>{
         }).populate('user');
         res.json(bienesRaices); 
     } catch (error) {
-        res.status(500).json({message: error.message});
+        return  res.status(500).json({ message: "Se produjo un error al intentar listar los Bienes Raices" });
     }
 };
 
@@ -26,7 +26,7 @@ export const crearBienRaiz = async (req, res) =>{
         const bienraizGuardado = await bienraiz.save();
         res.json(bienraizGuardado);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return  res.status(500).json({ message: "Se produjo un error al intentar crear un Bien Raíz" });
     }
 };
 
@@ -36,7 +36,7 @@ export const obtenerBieneRaiz = async (req, res) =>{
        if(!bienraiz) return res.status(404).json({ message: "Bien Raíz no Encontrado" }); 
        res.json(bienraiz);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+       return  res.status(404).json({ message: "Bien Raíz no Encontrado" });
     }
 };
 
@@ -47,7 +47,7 @@ export const actualizarBieneRaiz = async (req, res) =>{
         if(!actualizaBienRaiz) return res.status(404).json({ message: "Bien Raíz no Encontrado" });
         res.json(actualizaBienRaiz);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return  res.status(404).json({ message: "Bien Raíz no Encontrado no se puede Actualizar" });
     }
 };
 
@@ -57,6 +57,6 @@ export const eliminarBienRaiz = async (req, res) =>{
         if(!borrarBienRaiz) return res.status(404).json({ message: "Bien Raíz no Encontrado" });
         return res.status(200).json({message: "Bien Raíz Eliminado Satisfactoriamente"});
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        return  res.status(404).json({ message: "Bien Raíz no Encontrado" });
     }
 };
