@@ -6,6 +6,6 @@ export const obtenerBienRaizRequest = (id) => axios.get(`/bienes_raices/${id}`);
 
 export const crearBienRaizRequest = (bienRaiz) => axios.post('/bienes_raices', bienRaiz);
 
-export const actualizarBienRaizRequest = (bienRaiz) => axios.put(`/bienes_raices/${bienRaiz._id}`, bienRaiz);
+export const actualizarBienRaizRequest = (id,bienRaiz) => axios.put(`/bienes_raices/${id}`, bienRaiz);
 
 export const eliminarBienRaizRequest = (id) => axios.delete(`/bienes_raices/${id}`);
