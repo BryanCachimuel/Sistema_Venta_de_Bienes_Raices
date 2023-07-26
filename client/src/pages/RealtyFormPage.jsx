@@ -1,18 +1,39 @@
 import {useForm} from 'react-hook-form'
 import {useRealty} from '../context/RealtyContext';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
+import { useEffect } from 'react';
 
 function RealtyFormPage() {
 
-  const {register, handleSubmit} = useForm();
+  const {register, handleSubmit, setValue} = useForm();
 
-  const {crearBienesRaices} = useRealty();
+  const {crearBienesRaices, obtenerBienRaiz, actualizarBienRaiz} = useRealty();
 
   const navegar = useNavigate();
+  const parametros = useParams();
 
+useEffect(() => {
+  async function cargarBienesRaices(){
+    if(parametros.id){
+      const realty = await obtenerBienRaiz(parametros.id);
+      console.log(realty);
+      setValue('inmueble',realty.inmueble);
+      setValue('descripcion',realty.descripcion);
+      setValue('propietario',realty.propietario);
+      setValue('costo',realty.costo);
+      setValue('antiguedad',realty.antiguedad);
+    }
+  }
+  cargarBienesRaices();
+},[])
+  
   const registraronSubmit = handleSubmit((data) => {
-    crearBienesRaices(data);
-    navegar('/bienes_raices');
+   if(parametros.id){
+    actualizarBienRaiz(parametros.id, data);
+   }else{
+    crearBienesRaices(data);  
+   }
+   navegar('/bienes_raices');
   })
 
   return (
