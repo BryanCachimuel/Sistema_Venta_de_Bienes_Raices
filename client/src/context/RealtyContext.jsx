@@ -1,5 +1,5 @@
 import {createContext, useContext, useState} from 'react';
-import {crearBienRaizRequest, obtenerBienesRaicesRequest} from '../api/realty';
+import {crearBienRaizRequest, obtenerBienesRaicesRequest, eliminarBienRaizRequest} from '../api/realty';
 
 const RealtyContext = createContext();
 
@@ -34,12 +34,22 @@ export function RealtyProvider({children}) {
         }
     }
 
+    const eliminarBienRaiz = async (id) => {
+        try {
+            const respuesta = await eliminarBienRaizRequest(id);
+            if(respuesta.status === 204) setRealtys(realtys.filter(realty => realty._id !== id));
+        } catch (error) {
+            console.log(error.response);
+        }
+    }
+
     return(
         <RealtyContext.Provider 
             value={{
                 realtys, 
                 crearBienesRaices,
                 obtenerTodosBienesRaices,
+                eliminarBienRaiz,
             }}
         >
             {children}
