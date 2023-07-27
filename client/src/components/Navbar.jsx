@@ -9,15 +9,11 @@ function Navbar() {
 
   return (
     <nav className="bg-zinc-700 my-3 flex justify-between py-5 px-10 rounded-lg">
-      {isAuthenticated ? (
-        <>
-          <Link to="/bienes_raices">Directorio Bienes Raices</Link>
-        </>
-      ) : (
-        <>
-          <Link to="/">Directorio Bienes Raices</Link>
-        </>
-      )}
+      <Link 
+        to={isAuthenticated ? "/bienes_raices" : "/"}
+      >
+        Directorio Bienes Raices
+      </Link>
       <ul className="flex gap-x-2">
         {isAuthenticated ? (
           <>
