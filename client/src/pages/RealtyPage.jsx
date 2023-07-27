@@ -13,7 +13,7 @@ function RealtyPage() {
   if(realtys.length === 0) return (<h1>No Existe Bienes Raices</h1>);
 
   return (
-    <div className='grid grid-cols-3 gap-2'>
+    <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-2'>
       {realtys.map((realty) =>(
        <RealtyCard realty={realty} key={realty._id}/>
       ))}
