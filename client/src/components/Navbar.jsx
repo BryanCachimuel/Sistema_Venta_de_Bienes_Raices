@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
-  const { isAuthenticated, cerrar_sesion } = useAuth();
+  const { isAuthenticated, cerrar_sesion, user } = useAuth();
 
   /* No se pone el nombre del usuario por que da un error
   const { isAuthenticated, cerrar_sesion, user } = useAuth();*/
