@@ -5,10 +5,8 @@ const RealtyContext = createContext();
 
 export const useRealty = () => {
     const context = useContext(RealtyContext);
-    if(!context){
-        throw new Error("useRealty esta siendo usado sin RealtyProvider");
-    }
-    return context;
+    if(!context) throw new Error("useRealty esta siendo usado sin RealtyProvider");
+     return context;
 }
 
 export function RealtyProvider({children}) {
